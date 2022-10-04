@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
     //FirebaseUser mUser;
+    //checking git comment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
