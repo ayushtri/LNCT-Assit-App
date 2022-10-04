@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         else if(pass.isEmpty() || pass.length()<7){
             password.setError("Enter a valid password");
+            Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show();
             password.requestFocus();
         }
         else{
