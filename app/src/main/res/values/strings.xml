@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LNCT Assist</string>
+    <string name="sign_up"><u>Sign Up</u></string>
+    <string name="sign_in"><u>Sign In</u></string>
+    <string name="resend"><u>Resend</u></string>
+    <string name="warning">⚠️ You\'ll receive a verification email.</string>
+    <string name="verifyHelp">ℹ️ Check spam folder before resending email.</string>
+    <string name="forgetPassword"><b><u>Forget Password?</u></b></string>
+    <string-array name="job">
+        <item>Student</item>
+        <item>Authority</item>
+    </string-array>
+</resources>
