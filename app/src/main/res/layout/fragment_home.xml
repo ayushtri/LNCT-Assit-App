@@ -7,10 +7,11 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/exampleTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Fragment"
         android:layout_gravity="center"
-        android:textSize="26sp"/>
+        android:text="Home Fragment"
+        android:textSize="26sp" />
 
 </FrameLayout>
