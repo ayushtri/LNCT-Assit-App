@@ -24,7 +24,7 @@ public class profileFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Sign Out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Sign Out..", Toast.LENGTH_SHORT).show();
             }
         });
 
