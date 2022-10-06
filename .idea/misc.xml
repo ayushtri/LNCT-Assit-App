@@ -9,6 +9,7 @@
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/ic_baseline_checklist_24.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
+        <entry key="..\:/LNCTAssist/app/src/main/res/drawable/in_background.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/login_btn.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/spinnerlogin.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout-v31/activity_main.xml" value="0.23229166666666667" />
@@ -22,6 +23,7 @@
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/toolbar.xml" value="0.14605263157894738" />
         <entry key="..\:/LNCTAssist/app/src/main/res/menu/action_menu.xml" value="0.14605263157894738" />
         <entry key="..\:/LNCTAssist/app/src/main/res/menu/bottom_nav_menu.xml" value="0.14671052631578949" />
+        <entry key="..\:/LNCTAssist/app/src/main/res/menu/profilefragmenu.xml" value="0.14671052631578949" />
       </map>
     </option>
   </component>
