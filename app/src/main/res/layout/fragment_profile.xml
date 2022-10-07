@@ -15,7 +15,7 @@
             android:id="@+id/signOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Out"
+            android:text="Log Out"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
             android:theme="@style/Theme.AppCompat.Light"/>
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imgPro"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/astrodefault"
@@ -56,22 +56,29 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/enrollmentPro"
+                android:id="@+id/emailPro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="15dp"
+                android:text="email"
+                android:textColor="@color/material_dynamic_neutral10"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/enrollmentPro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="enrollment"
                 android:textColor="@color/material_dynamic_neutral10"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/branchPro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
                 android:text="branch"
                 android:textColor="@color/material_dynamic_neutral10"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
