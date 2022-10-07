@@ -67,8 +67,11 @@ public class profileFragment extends Fragment {
                     String enrollFB=snapshot.child("enrollment").getValue().toString();
                     name.setText(nameFB);
                     enrollment.setText(enrollFB);
-                    String branchExtract = enrollFB.substring(4,6);//0103IT201054
+                    String branchExtract = enrollFB.substring(4,6);
                     branch.setText(branchExtract);
+                }
+                else{
+                    Toast.makeText(getActivity(), "Try Again later", Toast.LENGTH_SHORT).show();
                 }
             }
 
