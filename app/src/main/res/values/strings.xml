@@ -14,4 +14,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="about_us">About Us</string>
     <string name="register_your_complaint"><b><u>Register Your Complaint:</u></b></string>
+    <string name="upload_image"><b><u>Upload Image</u></b></string>
+    <string-array name="compType">
+        <item>Accounts related</item>
+        <item>Bus related</item>
+        <item>Management related</item>
+        <item>Other</item>
+    </string-array>
 </resources>
