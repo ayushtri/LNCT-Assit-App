@@ -252,7 +252,7 @@ public class homeFragment extends Fragment {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
-            Complaints complaints=new Complaints(subj, compl, sugge, userUID, compID);
+            Complaints complaints=new Complaints(subj, compl, sugge, userUID, compID, text);
             databaseReference.child(text).child(compID).setValue(complaints).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

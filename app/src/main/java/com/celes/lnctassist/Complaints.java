@@ -1,7 +1,7 @@
 package com.celes.lnctassist;
 
 public class Complaints {
-    public String subject, complaint, suggestions, userUID, compID;
+    public String subject, complaint, suggestions, userUID, compID, compType;
 
     public String getSubject() {
         return subject;
@@ -39,17 +39,26 @@ public class Complaints {
 
     public void setCompID(String compID) {this.compID = compID; }
 
+    public String getCompType() {
+        return compType;
+    }
+
+    public void setCompType(String compType) {
+        this.compType = compType;
+    }
+
 
     public Complaints(){
 
     }
 
-    public Complaints(String subject, String complaint, String suggestions, String userUID, String compID) {
+    public Complaints(String subject, String complaint, String suggestions, String userUID, String compID, String compType) {
         this.subject = subject;
         this.complaint = complaint;
         this.suggestions = suggestions;
         this.userUID = userUID;
         this.compID = compID;
+        this.compType = compType;
     }
 }
 

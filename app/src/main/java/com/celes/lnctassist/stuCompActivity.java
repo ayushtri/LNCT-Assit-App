@@ -41,6 +41,7 @@ public class stuCompActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String compID = intent.getStringExtra("key");
+        String compType = intent.getStringExtra("comtype");
 
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,13 +59,13 @@ public class stuCompActivity extends AppCompatActivity {
         sugges=findViewById(R.id.sugges);
         compImgView=findViewById(R.id.compImgView);
         databaseReference = FirebaseDatabase.getInstance().getReference("Complaints");
-        databaseReference.child("Accounts related").child(compID).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(compType).child(compID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     String subject = String.valueOf(snapshot.child("subject").getValue());
                     String complaint = String.valueOf(snapshot.child("complaint").getValue());
-                    String suggestion = String.valueOf(snapshot.child("suggestion").getValue());
+                    String suggestion = String.valueOf(snapshot.child("suggestions").getValue());
                     String compImg = String.valueOf(snapshot.child("compImg").getValue());
                     subComp.setText(subject);
                     comp.setText(complaint);

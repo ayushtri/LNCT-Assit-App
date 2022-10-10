@@ -53,9 +53,10 @@ public class adapterTrackComp extends RecyclerView.Adapter<adapterTrackComp.MyVi
                 public void onClick(View view) {
                     Complaints complaints=list.get(getAdapterPosition());
                     String temp= complaints.getCompID();
-                    Toast.makeText(view.getContext(), temp, Toast.LENGTH_SHORT).show();
+                    String comtype = complaints.getCompType();
                     Intent intent = new Intent(view.getContext(),stuCompActivity.class);
                     intent.putExtra("key" , temp);
+                    intent.putExtra("comtype", comtype);
                     view.getContext().startActivity(intent);
                 }
             });
