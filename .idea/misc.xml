@@ -6,6 +6,7 @@
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/background.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/edittext_background.xml" value="0.2265" />
+        <entry key="..\:/LNCTAssist/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/ic_baseline_checklist_24.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2265" />
         <entry key="..\:/LNCTAssist/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
@@ -16,10 +17,12 @@
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/activity_forgot_pass.xml" value="0.23229166666666667" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/activity_main.xml" value="0.14671052631578949" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
+        <entry key="..\:/LNCTAssist/app/src/main/res/layout/activity_stu_comp.xml" value="0.19067977768277042" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/activity_student_main.xml" value="0.1" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/fragment_home.xml" value="0.19067977768277042" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/fragment_profile.xml" value="0.14671052631578949" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/fragment_track_comp.xml" value="0.14671052631578949" />
+        <entry key="..\:/LNCTAssist/app/src/main/res/layout/recyleviewcomplayout.xml" value="0.18982471141513468" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/spinnerhome.xml" value="0.14605263157894738" />
         <entry key="..\:/LNCTAssist/app/src/main/res/layout/toolbar.xml" value="0.14605263157894738" />
         <entry key="..\:/LNCTAssist/app/src/main/res/menu/action_menu.xml" value="0.14605263157894738" />

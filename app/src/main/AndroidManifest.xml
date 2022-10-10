@@ -15,6 +15,11 @@
         android:theme="@style/Theme.LNCTAssist"
         tools:targetApi="31">
         <activity
+            android:name=".stuCompActivity"
+            android:label="View Complaint"
+            android:parentActivityName=".studentMain"
+            android:exported="false" />
+        <activity
             android:name=".studentMain"
             android:exported="false" />
         <activity

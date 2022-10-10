@@ -32,8 +32,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -54,6 +57,7 @@ public class homeFragment extends Fragment {
     FirebaseStorage storage;
     StorageReference storageReference;
     boolean imgUp=false;
+    String userUID=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -199,20 +203,20 @@ public class homeFragment extends Fragment {
         }
     }
 
-    private void uploadPicture(String text) {
+    private void uploadPicture(String text, String compID) {
         progressDialog.setMessage("Please wait..");
         progressDialog.setTitle("Submitting");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         String randomKey = UUID.randomUUID().toString();
         StorageReference strRef = storageReference.child("imagesComp/" + randomKey);
+        databaseReference= FirebaseDatabase.getInstance().getReference("Complaints");
         strRef.putFile(imageUri)
                 .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()){
-                            FirebaseDatabase.getInstance().getReference("Complaints").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .child(text).child("compImg").setValue(randomKey);
+                            databaseReference.child(text).child(compID).child("compImg").setValue(randomKey);
                             progressDialog.dismiss();
                         }
                         else{
@@ -227,9 +231,8 @@ public class homeFragment extends Fragment {
         String subj = subject.getText().toString().trim();
         String compl = complaint.getText().toString().trim();
         String sugge = suggestion.getText().toString().trim();
-        String checkImg = uploadImg.getText().toString();
-        String checkImgTemp = String.valueOf(R.id.uploadImg);
         databaseReference= FirebaseDatabase.getInstance().getReference("Complaints");
+        String compID = databaseReference.push().getKey();
 
         if(subj.isEmpty()){
             subject.setError("Subject can't be empty");
@@ -249,14 +252,13 @@ public class homeFragment extends Fragment {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
-            Complaints complaints=new Complaints(subj, compl, sugge);
-            FirebaseDatabase.getInstance().getReference("Complaints").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child(text).setValue(complaints).addOnCompleteListener(new OnCompleteListener<Void>() {
+            Complaints complaints=new Complaints(subj, compl, sugge, userUID, compID);
+            databaseReference.child(text).child(compID).setValue(complaints).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(getContext(), "Complaint registered successfully", Toast.LENGTH_SHORT).show();
-                                uploadPicture(text);
+                                uploadPicture(text,compID);
                                 progressDialog.dismiss();
                             }
                             else{
