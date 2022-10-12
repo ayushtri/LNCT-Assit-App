@@ -15,10 +15,13 @@
         android:theme="@style/Theme.LNCTAssist"
         tools:targetApi="31">
         <activity
-            android:name=".stuCompActivity"
-            android:label="View Complaint"
-            android:parentActivityName=".studentMain"
+            android:name=".authorityActivity"
             android:exported="false" />
+        <activity
+            android:name=".stuCompActivity"
+            android:exported="false"
+            android:label="View Complaint"
+            android:parentActivityName=".studentMain" />
         <activity
             android:name=".studentMain"
             android:exported="false" />

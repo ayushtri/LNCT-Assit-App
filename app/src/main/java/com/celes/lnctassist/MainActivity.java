@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +24,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Button login;
@@ -31,12 +38,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView textView, signUP_resend, forgot_msg;
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
     //FirebaseUser mUser;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = getSharedPreferences("authLogin", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        String temp = sharedPreferences.getString("authTypeTemp", "default :(");
+        if(sharedPreferences.getString("isLogin", "no").equals("yes")){
+            toAuthorityActivity(temp);
+        }
+
 
         Spinner spinner=findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.job, android.R.layout.simple_spinner_item);
@@ -61,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(text.equals("Student")){
             //Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
             //username.setHint("Enrollment No.");
+            username.setHint("Email");
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -70,12 +89,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             });
         }
         else{
-            //Toast.makeText(this, "Faculty", Toast.LENGTH_SHORT).show();
-            //username.setHint("Username");
+            username.setHint("Username");
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(MainActivity.this, "Login for Authority", Toast.LENGTH_SHORT).show();
+                    authorityLogin();
                 }
             });
         }
@@ -193,5 +211,54 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
         passwordresetDialog.create().show();
 
+    }
+    private void authorityLogin() {
+        String authusername = username.getText().toString().trim();
+        String pass = password.getText().toString();
+
+        if(authusername.isEmpty()){
+            username.setError("Please enter a username");
+            username.requestFocus();
+        }
+        else if(pass.isEmpty()){
+            password.setError("Enter a valid password");
+            password.requestFocus();
+        }
+        else{
+            databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child("Authority").child(authusername).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        Authority authority = snapshot.getValue(Authority.class);
+                        String passCheck = authority.getPassword();
+                        if(passCheck.equals(pass)){
+                            editor.putString("isLogin", "yes");
+                            editor.putString("authTypeTemp", authority.getAuthType());
+                            editor.putString("authIDTemp", authority.getauthID());
+                            editor.commit();
+                            toAuthorityActivity(authority.getAuthType());
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
+
+    private void toAuthorityActivity(String authType) {
+        Intent intent = new Intent(this, authorityActivity.class);
+        intent.putExtra("authType", authType);
+        startActivity(intent);
     }
 }

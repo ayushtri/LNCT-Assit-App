@@ -1,0 +1,72 @@
+package com.celes.lnctassist;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
+public class authorityActivity extends AppCompatActivity {
+    TextView textView;
+    Toolbar toolbar;
+    BottomNavigationView bottomNavigationView;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_authority);
+
+        sharedPreferences = getSharedPreferences("authLogin", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        String temp = sharedPreferences.getString("authTypeTemp", "default :(");
+        if(sharedPreferences.getString("isLogin", "no").equals("no")){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        Intent i = getIntent();
+        String test = i.getStringExtra("authType");
+
+        replaceFragment1(new homeFragmentAuthority());
+
+        bottomNavigationView=findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.home:
+                        replaceFragment1(new homeFragmentAuthority());
+                        break;
+                    case R.id.profile:
+                        replaceFragment1(new profileFragmentAuthority());
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    private void replaceFragment1(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
+    }
+}
