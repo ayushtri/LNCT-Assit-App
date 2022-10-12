@@ -1,64 +1,79 @@
 package com.celes.lnctassist;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link homeFragmentAuthority#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 public class homeFragmentAuthority extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public homeFragmentAuthority() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment homeFragmentAuthority.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static homeFragmentAuthority newInstance(String param1, String param2) {
-        homeFragmentAuthority fragment = new homeFragmentAuthority();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    View view;
+    RecyclerView recyclerView;
+    ArrayList<Complaints> list;
+    DatabaseReference databaseReference;
+    adapterTrackComp adapter;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_home_authority, container, false);
 
+        recyclerView=view.findViewById(R.id.recycleViewAuthComp);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Complaints");
+        list = new ArrayList<>();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new adapterTrackComp(getContext(), list);
+        recyclerView.setAdapter(adapter);
+
+        sharedPreferences = getActivity().getSharedPreferences("authLogin", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        String authTypeTemp = sharedPreferences.getString("authTypeTemp", "default :(");
+
+        databaseReference.child(authTypeTemp).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Complaints complaints=dataSnapshot.getValue(Complaints.class);
+                    if(complaints.compType.equals(authTypeTemp)){
+                        list.add(complaints);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return view;
+    }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_authority, container, false);
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 }

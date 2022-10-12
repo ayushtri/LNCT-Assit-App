@@ -41,6 +41,8 @@ public class profileFragmentAuthority extends Fragment {
                 editor.clear();
                 editor.commit();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 Toast.makeText(getActivity(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }

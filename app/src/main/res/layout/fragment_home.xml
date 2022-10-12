@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/in_background"
+    android:background="#f6e9fe"
     tools:context=".homeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,11 +40,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:textSize="18sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,8 +60,8 @@
                     android:layout_height="48dp"
                     android:ems="10"
                     android:hint="Subject"
-                    android:textSize="18sp"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/subCount"
@@ -70,7 +70,7 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="bottom"
                     android:text="100"
-                    android:textSize="11sp"/>
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -96,7 +96,7 @@
                     android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical"
                     android:scrollHorizontally="false"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/compCount"
@@ -151,11 +151,11 @@
                     android:inputType="textMultiLine"
                     android:lines="3"
                     android:minHeight="48dp"
-                    android:textSize="18sp"
                     android:overScrollMode="always"
                     android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical"
-                    android:scrollHorizontally="false" />
+                    android:scrollHorizontally="false"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/suggCount"
@@ -164,7 +164,7 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="bottom"
                     android:text="500"
-                    android:textSize="11sp"/>
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <Button
