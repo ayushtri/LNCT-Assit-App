@@ -15,6 +15,9 @@
         android:theme="@style/Theme.LNCTAssist"
         tools:targetApi="31">
         <activity
+            android:name=".stuCompActivityAuthority"
+            android:exported="false" />
+        <activity
             android:name=".authorityActivity"
             android:exported="false" />
         <activity

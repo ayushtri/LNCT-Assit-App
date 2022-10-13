@@ -27,7 +27,7 @@ public class homeFragmentAuthority extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Complaints> list;
     DatabaseReference databaseReference;
-    adapterTrackComp adapter;
+    adapterTrackCompAuthority adapter;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -39,7 +39,7 @@ public class homeFragmentAuthority extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("Complaints");
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new adapterTrackComp(getContext(), list);
+        adapter = new adapterTrackCompAuthority(getContext(), list);
         recyclerView.setAdapter(adapter);
 
         sharedPreferences = getActivity().getSharedPreferences("authLogin", Context.MODE_PRIVATE);
