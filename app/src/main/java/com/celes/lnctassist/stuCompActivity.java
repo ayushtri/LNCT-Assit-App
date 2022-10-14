@@ -1,15 +1,22 @@
 package com.celes.lnctassist;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +41,8 @@ public class stuCompActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     StorageReference storageReference;
     Toolbar toolbar;
+    Button deleteBtn;
+    String temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +68,7 @@ public class stuCompActivity extends AppCompatActivity {
         comp=findViewById(R.id.comp);
         sugges=findViewById(R.id.sugges);
         compImgView=findViewById(R.id.compImgView);
+        deleteBtn = findViewById(R.id.deleteBtn);
         databaseReference = FirebaseDatabase.getInstance().getReference("Complaints");
         databaseReference.child(compType).child(compID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -68,6 +78,7 @@ public class stuCompActivity extends AppCompatActivity {
                     String complaint = String.valueOf(snapshot.child("complaint").getValue());
                     String suggestion = String.valueOf(snapshot.child("suggestions").getValue());
                     String compImg = String.valueOf(snapshot.child("compImg").getValue());
+                    temp=compImg;
                     subComp.setText(subject);
                     comp.setText(complaint);
                     sugges.setText(suggestion);
@@ -93,7 +104,7 @@ public class stuCompActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast.makeText(stuCompActivity.this, "Try again later", Toast.LENGTH_SHORT).show();
+                    ///Complaint will not load
                 }
             }
 
@@ -103,7 +114,38 @@ public class stuCompActivity extends AppCompatActivity {
             }
         });
 
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder deleteConfirmationDialog = new AlertDialog.Builder(view.getContext());
+                deleteConfirmationDialog.setTitle("Confirm Delete?");
+                deleteConfirmationDialog.setMessage("Are you sure you want to delete this complaint?");
+                deleteConfirmationDialog.setPositiveButton("delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        databaseReference.child(compType).child(compID).removeValue();
+                        FirebaseStorage.getInstance().getReference().child("imagesComp/"+temp).delete();
+                        toStuMain();
+                    }
+                });
+                deleteConfirmationDialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                deleteConfirmationDialog.create().show();
+            }
+        });
 
 
+
+    }
+
+    private void toStuMain() {
+        Intent intent = new Intent(this, studentMain.class);
+        Toast.makeText(this, "Complaint deleted successfully", Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+        finish();
     }
 }

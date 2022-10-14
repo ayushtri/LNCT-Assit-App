@@ -96,6 +96,14 @@
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
                     android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/deleteBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="Delete Complaint" />
             </LinearLayout>
         </ScrollView>
     </FrameLayout>

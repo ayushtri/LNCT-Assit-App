@@ -13,6 +13,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -260,6 +262,9 @@ public class homeFragment extends Fragment {
                                 Toast.makeText(getContext(), "Complaint registered successfully", Toast.LENGTH_SHORT).show();
                                 uploadPicture(text,compID);
                                 progressDialog.dismiss();
+                                subject.setText(null);
+                                complaint.setText(null);
+                                suggestion.setText(null);
                             }
                             else{
                                 Toast.makeText(getContext(), "Try again later", Toast.LENGTH_SHORT).show();
@@ -271,4 +276,5 @@ public class homeFragment extends Fragment {
 
 
     }
+
 }
