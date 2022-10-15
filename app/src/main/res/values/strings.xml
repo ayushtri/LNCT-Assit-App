@@ -6,6 +6,7 @@
     <string name="warning">⚠️ You\'ll receive a verification email.</string>
     <string name="verifyHelp">ℹ️ Check spam folder before resending email.</string>
     <string name="forgetPassword"><b><u>Forgot Password?</u></b></string>
+    <string name="aboutUS">This app is built using Android Studio in Java Language and uses Google firebase as the database.</string>
     <string-array name="job">
         <item>Student</item>
         <item>Authority</item>

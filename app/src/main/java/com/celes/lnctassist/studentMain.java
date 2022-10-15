@@ -2,12 +2,14 @@ package com.celes.lnctassist;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -72,7 +74,17 @@ public class studentMain extends AppCompatActivity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Toast.makeText(studentMain.this, "WorkingAbout", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(studentMain.this, "WorkingAbout", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder aboutUS = new AlertDialog.Builder(studentMain.this);
+                aboutUS.setTitle("About Us");
+                aboutUS.setMessage(R.string.aboutUS);
+                aboutUS.setNegativeButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                aboutUS.create().show();
                 return true;
             }
         });

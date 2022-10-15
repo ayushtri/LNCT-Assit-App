@@ -164,7 +164,7 @@ public class homeFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(view.getContext());
-                        ConfirmationDialog.setTitle("Confirmation?");
+                        ConfirmationDialog.setTitle("Confirmation");
                         ConfirmationDialog.setMessage("Are you sure you want to register this complaint?");
                         ConfirmationDialog.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
                             @Override
