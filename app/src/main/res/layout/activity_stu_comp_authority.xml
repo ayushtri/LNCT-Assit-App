@@ -98,6 +98,50 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="20dp"
+                    android:text="@string/set_status" />
+
+                <RadioGroup
+                    android:id="@+id/radioGrpStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/compSentBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="complaint sent" />
+
+                    <RadioButton
+                        android:id="@+id/onGoingBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Ongoing" />
+
+                    <RadioButton
+                        android:id="@+id/completedBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Completed" />
+
+                    <RadioButton
+                        android:id="@+id/rejectedBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Rejected" />
+
+                </RadioGroup>
+
+                <TextView
                     android:id="@+id/compUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,7 +158,6 @@
                     android:gravity="center"
                     android:text="userCompEnroll"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"
                     android:textSize="20sp" />
 
                 <TextView

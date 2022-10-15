@@ -2,6 +2,7 @@ package com.celes.lnctassist;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -161,7 +163,23 @@ public class homeFragment extends Fragment {
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        regComp(text);
+                        AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(view.getContext());
+                        ConfirmationDialog.setTitle("Confirmation?");
+                        ConfirmationDialog.setMessage("Are you sure you want to register this complaint?");
+                        ConfirmationDialog.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                regComp(text);
+                            }
+                        });
+                        ConfirmationDialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                        ConfirmationDialog.create().show();
+
                     }
                 });
 
@@ -254,7 +272,7 @@ public class homeFragment extends Fragment {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
-            Complaints complaints=new Complaints(subj, compl, sugge, userUID, compID, text);
+            Complaints complaints=new Complaints(subj, compl, sugge, userUID, compID, text, "complaint sent");
             databaseReference.child(text).child(compID).setValue(complaints).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

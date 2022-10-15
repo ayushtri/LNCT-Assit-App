@@ -2,6 +2,7 @@ package com.celes.lnctassist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,19 @@ public class adapterTrackCompAuthority extends RecyclerView.Adapter<adapterTrack
     public void onBindViewHolder(@NonNull adapterTrackCompAuthority.MyViewHolder holder, int position) {
         Complaints complaints=list.get(position);
         holder.subject.setText(complaints.getSubject());
+        String st = context.getResources().getString(R.string.status);
+        holder.compStatus.setText(st.concat(" ").concat(complaints.getCompStatus()));
+        switch (complaints.getCompStatus()) {
+            case "On Going":
+                holder.compStatus.setTextColor(Color.parseColor("#FFBF00"));
+                break;
+            case "Completed":
+                holder.compStatus.setTextColor(Color.parseColor("#000000"));
+                break;
+            case "Rejected":
+                holder.compStatus.setTextColor(Color.parseColor("#FF0000"));
+                break;
+        }
     }
 
     @Override
@@ -41,11 +55,12 @@ public class adapterTrackCompAuthority extends RecyclerView.Adapter<adapterTrack
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView subject;
+        TextView subject, compStatus;
         ImageView compImg;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             subject=itemView.findViewById(R.id.subjectPreview);
+            compStatus=itemView.findViewById(R.id.compStatus);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
