@@ -41,7 +41,6 @@ public class profileFragment extends Fragment {
         firebaseAuth=FirebaseAuth.getInstance();
 
         email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        //checking git
 
         readData();
 
