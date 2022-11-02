@@ -29,6 +29,7 @@ public class trackCompFragment extends Fragment {
     Spinner spinner;
     RecyclerView recyclerView;
     ArrayList<Complaints> list;
+    FirebaseAuth mAuth;
     DatabaseReference databaseReference;
     adapterTrackComp adapter;
 
@@ -56,12 +57,13 @@ public class trackCompFragment extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 adapter = new adapterTrackComp(getContext(), list);
                 recyclerView.setAdapter(adapter);
+                String liveUserUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 databaseReference.child(text).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                             Complaints complaints=dataSnapshot.getValue(Complaints.class);
-                            if(complaints.userUID.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            if(complaints.userUID.equals(liveUserUID)) {
                                 list.add(complaints);
                             }
                         }
