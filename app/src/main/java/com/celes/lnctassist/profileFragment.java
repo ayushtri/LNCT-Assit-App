@@ -28,6 +28,7 @@ public class profileFragment extends Fragment {
     TextView name, email, enrollment, branch;
     Button logOutbutton;
     FirebaseAuth firebaseAuth;
+    //Testing git
     DatabaseReference databaseReference;
 
     @Override
